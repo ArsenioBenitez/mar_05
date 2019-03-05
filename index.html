@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
     <meta charset="utf-8">
     <title></title>
   </head>
   <body>
     <script type="text/javascript">
-    var dataP = d3.csv("color.csv",function(data)
+
+    var dataP = d3.csv("colors.csv");
+    dataP.then(function(data)
     {
       console.log(data);
-    },
+    }
+    ,
     function(err)
     {
       console.log(err);
     })
     </script>
-
   </body>
 </html>
