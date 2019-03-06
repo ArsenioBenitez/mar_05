@@ -8,16 +8,70 @@
   <body>
     <script type="text/javascript">
 
+
+
+
     var dataP = d3.csv("colors.csv");
     dataP.then(function(data)
     {
       console.log(data);
+      drawChart(data);
+
     }
     ,
     function(err)
     {
       console.log(err);
     })
+
+
+
+
+
+
+    var drawChart = function(data)
+    {
+      var width = 300;
+      var height = 400;
+      var barWidth = width/data.length;
+      var svg = d3.select("svg")
+        .attr("width",width)
+        .attr("height",height)
+        .attr("fill","black");
+
+
+      svg.selectAll("rect")
+        .data(data)
+        .enter()
+        .append("rect")
+        .attr("x",function(d,i)
+        {
+            return i * barWidth;
+        })
+        .attr("y",function(d)
+        {
+          return height - parseInt(d.num) * 10;
+        })
+        .attr("width",barWidth)
+        .attr("height",function(d)
+        {
+          return parseInt(d.num) * 10;
+        })
+        .attr("fill",function(d)
+        {
+          return d.color;
+        }
+
+        );
+    }
+
+
     </script>
+    <svg tag = "csv"></svg>
+
+
+    <svg tag = "json"></svg>
+
+
   </body>
 </html>
