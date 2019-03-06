@@ -28,6 +28,7 @@
     dataP.then(function(data)
     {
       drawChart(data,"#json");
+      drawLegend(data,"legend1");
 
     }
     ,
@@ -74,15 +75,68 @@
           return d.color;
         }
 
-        );
+        )
+        var legend = svg.append("g")
+                        .attr("class", "legend")
+                        .attr("x", 400)
+                        .attr("y", 50)
+                        .attr("height", 300)
+                        .attr("width", 200);
+        legend.selectAll('g').data(data)
+              .enter()
+              .append('g')
+              .each(function(d, i)
+               {
+                var g = d3.select(this);
+                g.append("rect")
+                 .attr("x", 200)
+                 .attr("y", i*15)
+                 .attr("width", 10)
+                 .attr("height", 10)
+                 .attr("fill",function(d)
+                 {
+                   return d.color;
+                });
+
+                g.append("text")
+                 .attr("x",  250)
+                 .attr("y", i * 15 + 12)
+                 .attr("height",30)
+                 .attr("width",100)
+                 .text(function(d)
+                 {
+                   return d.color;
+                 });
+
+                });
     }
+    // var drawLegend = function(data,tag){
+    //   var legend = d3.select(tag);
+    //   legend.selectAll("rect")
+    //       .data(data)
+    //       .enter()
+    //       .append("rect")
+    //       .attr("x",0)
+    //       .attr("y",function(d,i)
+    //       {
+    //         return i*2;
+    //       })
+    //       .attr("width",50)
+    //       .attr("height",50)
+    //       .attr("fill",function(d)
+    //     {
+    //       return d.color;
+    //     });
+    // }
 
 
     </script>
-    <svg tag id = "csv"></svg>
-    <hr />
 
+    <svg tag id = "csv"></svg>
+    <svg tag id ="legend1" width="300" height="400"></svg>
+    <hr />
     <svg tag id = "json"></svg>
+    <svg tag id ="legend1" width="300" height="400"></svg>
 
 
   </body>
