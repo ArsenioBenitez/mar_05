@@ -14,8 +14,20 @@
     var dataP = d3.csv("colors.csv");
     dataP.then(function(data)
     {
-      console.log(data);
-      drawChart(data);
+      drawChart(data,"#csv");
+
+    }
+    ,
+    function(err)
+    {
+      console.log(err);
+    })
+
+
+    var dataP = d3.json("colors.json");
+    dataP.then(function(data)
+    {
+      drawChart(data,"#json");
 
     }
     ,
@@ -29,12 +41,12 @@
 
 
 
-    var drawChart = function(data)
+    var drawChart = function(data,tag)
     {
       var width = 300;
       var height = 400;
       var barWidth = width/data.length;
-      var svg = d3.select("svg")
+      var svg = d3.select(tag)
         .attr("width",width)
         .attr("height",height)
         .attr("fill","black");
@@ -67,10 +79,10 @@
 
 
     </script>
-    <svg tag = "csv"></svg>
+    <svg tag id = "csv"></svg>
+    <hr />
 
-
-    <svg tag = "json"></svg>
+    <svg tag id = "json"></svg>
 
 
   </body>
