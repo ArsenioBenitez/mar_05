@@ -88,7 +88,7 @@
               .each(function(d, i)
                {
                 var g = d3.select(this);//found this help on stackoverflow
-                g.append("rect")
+                g.append("rect")//we add svg group elements to each chart then add group elements to those group elements to group a rectangle with a color name
                  .attr("x", 200)
                  .attr("y", i*15)
                  .attr("width", 10)
